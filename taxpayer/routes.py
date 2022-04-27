@@ -1,7 +1,6 @@
-from flask import current_app as app, session, request, jsonify
+from flask import current_app as app, session, request, jsonify, abort
 from datetime import timedelta
 from flask_login import login_required, logout_user, current_user, login_user
-from flask_restful import abort
 from taxpayer import db, bcrypt
 from taxpayer.models import Accountant, TaxPayer
 

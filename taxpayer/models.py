@@ -27,7 +27,14 @@ class TaxPayer(db.Model):
     firstName = db.Column(db.String(120), nullable=False)
     lastName = db.Column(db.String(120), nullable=False)
     phoneNumber = db.Column(db.String(120), nullable=False)
-    state = db.Column(db.String(120), nullable=True)
+    state = db.Column(db.String(120), nullable=False)
+    stateTax = db.Column(db.Integer, nullable=False, default=0)
+    fines = db.Column(db.Integer, nullable=False, default=0)
+    arrears = db.Column(db.Integer, nullable=False, default=0)
+    yearsOwned = db.Column(db.Integer, nullable=False, default=0)
+    datePaid = db.Column(db.DateTime(120), nullable=False, default=datetime.utcnow)
+    salary = db.Column(db.Integer, nullable=False)
+    status = db.Column(db.String(120), nullable=False, default='Paid')
     user_id = db.Column(db.Integer, db.ForeignKey('accountant.id'), nullable=False)
 
     #def __repr__(self):

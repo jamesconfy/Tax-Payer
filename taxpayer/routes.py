@@ -9,17 +9,20 @@ from taxpayer.utils import Tax, getDiff, getDate
 @app.route('/')
 @app.route('/home')
 def home():
-    taxPayers = TaxPayer.query.all()
-    count = 0
-    txPayers = {}
-    for payer in taxPayers:
-        newObj = {"first name": payer.firstName, "last name": payer.lastName,
+    if current_user.is_authenticated:
+        taxPayers = TaxPayer.query.all()
+        count = 0
+        txPayers = {}
+        for payer in taxPayers:
+            newObj = {"first name": payer.firstName, "last name": payer.lastName,
                   "email": payer.email, "state": payer.state, "phone number": payer.phoneNumber, "accountant": f"{payer.accountant.firstName} {payer.accountant.lastName}"
                   }
 
-        count += 1
-        txPayers[f"Payer{count}"] = newObj
-    return txPayers
+            count += 1
+            txPayers[f"Payer{count}"] = newObj
+        return txPayers
+    else:
+        return jsonify('Try login first boss')
 
 
 @app.before_request
